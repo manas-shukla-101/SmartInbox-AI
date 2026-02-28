@@ -1,7 +1,7 @@
 # ⚡ SmartInbox AI: The Intelligent Email Gatekeeper
 
-![GitHub stars](https://img.shields.io/github/stars/your-username/repo-name?style=for-the-badge&color=ffd700)
-![GitHub forks](https://img.shields.io/github/forks/your-username/repo-name?style=for-the-badge&color=808080)
+![GitHub stars](https://img.shields.io/github/stars/manas-shukla-101/SmartInbox-AI?style=for-the-badge&color=ffd700)
+![GitHub forks](https://img.shields.io/github/forks/manas-shukla-101/SmartInbox-AI?style=for-the-badge&color=808080)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)
 ![License](https://img.shields.io/badge/License-MIT-green) 
 ![Built with Python](https://img.shields.io/badge/Built%20with-LangFlow-blue?style=for-the-badge&logo=python)
