@@ -10,21 +10,20 @@
 ---
 
 ## 📑 Table of Contents
-- [⚡ SmartInbox AI: The Intelligent Email Gatekeeper](#-smartinbox-ai-the-intelligent-email-gatekeeper)
-- [🌪️ The Problem](#️-the-problem)
-- [💡 The Solution: SmartInbox AI](#-the-solution-smartinbox-ai)
-  - [🛠️ The Tech Stack](#️-the-tech-stack)
-- [🎮 Live Visual Workflow](#-live-visual-workflow)
-- [🧠 Strategic Logic Flow](#-strategic-logic-flow)
-  - [1. Ingestion & Analysis](#1-ingestion--analysis)
-  - [2. The Decision Engine](#2-the-decision-engine)
-  - [3. The Human-in-the-Loop Edge](#3-the-human-in-the-loop-edge)
-- [🚀 Quick Start Importing the Flow](#-quick-start-importing-the-flow)
-- [💡 Why This Project](#-why-this-project)
-- [🔧 Use Cases](#-use-cases)
-- [📊 Workflow Details](#-workflow-details)
-- [🌐 Socials](#-socials)
 
+| Section | Description |
+|---------|-------------|
+| [⚡ Overview](#-smartinbox-ai-the-intelligent-email-gatekeeper) | Project introduction and badges |
+| [🌪️ Problem](#️-the-problem) | The email overload challenge |
+| [💡 Solution](#-the-solution-smartinbox-ai) | How SmartInbox AI solves it |
+| [🛠️ Tech Stack](#️-the-tech-stack) | Technologies used |
+| [🎮 Demo](#-live-visual-workflow) | Live workflow visualization |
+| [🧠 Logic Flow](#-strategic-logic-flow) | How the system works |
+| [🚀 Quick Start](#-quick-start-importing-the-flow) | Setup instructions |
+| [💡 Why This Project](#-why-this-project) | Key demonstrations |
+| [🔧 Use Cases](#-use-cases) | Practical applications |
+| [📊 Workflow Details](#-workflow-details) | Node breakdown |
+| [🌐 Connect](#-socials) | Social links |
 ---
 
 ## 🌪️ The Problem
