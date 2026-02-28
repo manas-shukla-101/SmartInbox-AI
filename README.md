@@ -9,6 +9,24 @@
 
 ---
 
+## 📑 Table of Contents
+- [⚡ SmartInbox AI: The Intelligent Email Gatekeeper](#-smartinbox-ai-the-intelligent-email-gatekeeper)
+- [🌪️ The Problem](#️-the-problem)
+- [💡 The Solution: SmartInbox AI](#-the-solution-smartinbox-ai)
+  - [🛠️ The Tech Stack](#️-the-tech-stack)
+- [🎮 Live Visual Workflow](#-live-visual-workflow)
+- [🧠 Strategic Logic Flow](#-strategic-logic-flow)
+  - [1. Ingestion & Analysis](#1-ingestion--analysis)
+  - [2. The Decision Engine](#2-the-decision-engine)
+  - [3. The Human-in-the-Loop Edge](#3-the-human-in-the-loop-edge)
+- [🚀 Quick Start Importing the Flow](#-quick-start-importing-the-flow)
+- [💡 Why This Project](#-why-this-project)
+- [🔧 Use Cases](#-use-cases)
+- [📊 Workflow Details](#-workflow-details)
+- [🌐 Socials](#-socials)
+
+---
+
 ## 🌪️ The Problem
 We receive **120+ emails daily**. 80% are noise. Traditional filters are "dumb"—they either miss sophisticated phishing or accidentally archive important client communications.
 
