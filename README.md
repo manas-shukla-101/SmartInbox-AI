@@ -1,7 +1,6 @@
 # ⚡ SmartInbox AI: The Intelligent Email Gatekeeper
 
 ![n8n](https://img.shields.io/badge/n8n-EA4B71.svg?style=for-the-badge&logo=n8n&logoColor=white)
-![Python](https://img.shields.io/badge/Python-3.11-blue?logo=python&logoColor=white) 
 ![LLM](https://img.shields.io/badge/LLM-GPT--4o-orange?style=for-the-badge&logo=openai)
 ![Gmail](https://img.shields.io/badge/Gmail-EA4335.svg?style=for-the-badge&logo=Gmail&logoColor=white)
 ![License](https://img.shields.io/badge/License-MIT-green) 
