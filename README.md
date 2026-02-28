@@ -26,7 +26,7 @@ An autonomous **Human-in-the-Loop (HITL)** orchestration that uses LLMs to think
 ## 🎮 Live Visual Workflow
 
 <div align="center">
-  <img src="YOUR_GIF_OR_IMAGE_LINK_HERE" alt="Project Workflow Demo" width="900" style="border-radius: 10px; border: 2px solid #555;">
+  <img src="SmartInbox-AI(demo).gif" alt="Project Workflow Demo" width="900" style="border-radius: 10px; border: 2px solid #555;">
   <p><i>Real-time execution of the AI Agent analyzing and routing incoming traffic.</i></p>
 </div>
 
@@ -55,8 +55,17 @@ Unlike basic scripts, this project features a **Wait for Approval** node. This d
 
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/manas-shukla-101/SmartInbox-AI.git](https://github.com/manas-shukla-101/SmartInbox-AI.git)
+   git clone https://github.com/manas-shukla-101/SmartInbox-AI.git
    ```
 2. **Import JSON Configuration:**
    - Open your dashboard (LangFlow/Flowise).
-   - Click Upload/Import and select the [SmartInbox AI](SmartInbox AI.json) file.
+   - Click Upload/Import and select the [SmartInbox-AI](SmartInbox-AI.json) file.
+3. **Connect API Credentials:**
+   - Input your _OPENAI_API_KEY_ or _change it to gemini model and use Gemini API_.
+   - Authenticate the Gmail Trigger node via Google Cloud Console.
+4. **Deploy:**
+   - Hit Publish. Your agent is now live.
+
+---
+
+## 
