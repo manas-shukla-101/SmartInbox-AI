@@ -1,0 +1,483 @@
+{
+  "name": "SmartInbox AI",
+  "nodes": [
+    {
+      "parameters": {
+        "model": {
+          "__rl": true,
+          "mode": "id",
+          "value": "gpt-4o-mini"
+        },
+        "builtInTools": {},
+        "options": {
+          "temperature": 0.1
+        }
+      },
+      "id": "8c3ab84f-81ea-474a-bae0-6774440dacb9",
+      "name": "OpenAI Chat Model",
+      "type": "@n8n/n8n-nodes-langchain.lmChatOpenAi",
+      "typeVersion": 1.3,
+      "position": [
+        1360,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "promptType": "define",
+        "text": "={{ $json.snippet }}",
+        "hasOutputParser": true,
+        "options": {
+          "systemMessage": "You are an email spam analyzer. Analyze the incoming email and determine if it is spam or legitimate. Consider factors like: sender reputation, suspicious links, urgency tactics, grammar quality, personalization, and content relevance. Output your classification in the structured format."
+        }
+      },
+      "id": "338fcc54-dc95-43c7-b022-23a23a300168",
+      "name": "Spam Analyzer Agent",
+      "type": "@n8n/n8n-nodes-langchain.agent",
+      "typeVersion": 3.1,
+      "position": [
+        1344,
+        400
+      ]
+    },
+    {
+      "parameters": {
+        "schemaType": "manual",
+        "inputSchema": "{\"type\": \"object\", \"properties\": {\"classification\": {\"type\": \"string\", \"enum\": [\"spam\", \"legitimate\"], \"description\": \"Whether the email is spam or legitimate\"}, \"confidence\": {\"type\": \"number\", \"description\": \"Confidence score from 0 to 1\"}, \"reasoning\": {\"type\": \"string\", \"description\": \"Brief explanation for the classification\"}}, \"required\": [\"classification\", \"confidence\", \"reasoning\"]}"
+      },
+      "id": "87d54fca-6f94-48ed-a152-a87aa49b5368",
+      "name": "Classification Output Parser",
+      "type": "@n8n/n8n-nodes-langchain.outputParserStructured",
+      "typeVersion": 1.3,
+      "position": [
+        1488,
+        624
+      ]
+    },
+    {
+      "parameters": {
+        "rules": {
+          "values": [
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.classification }}",
+                    "rightValue": "spam",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "d9573524-4b1c-432f-a56b-532fc0dc843c"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Spam"
+            },
+            {
+              "conditions": {
+                "options": {
+                  "caseSensitive": true,
+                  "leftValue": "",
+                  "typeValidation": "strict",
+                  "version": 3
+                },
+                "conditions": [
+                  {
+                    "leftValue": "={{ $json.output.classification }}",
+                    "rightValue": "legitimate",
+                    "operator": {
+                      "type": "string",
+                      "operation": "equals"
+                    },
+                    "id": "22e3e0df-d525-41a6-946a-a6240b4940c9"
+                  }
+                ],
+                "combinator": "and"
+              },
+              "renameOutput": true,
+              "outputKey": "Legitimate"
+            }
+          ]
+        },
+        "options": {
+          "fallbackOutput": "extra"
+        }
+      },
+      "id": "98d394fd-4c50-436c-a897-2439c83a2cab",
+      "name": "Route by Classification",
+      "type": "n8n-nodes-base.switch",
+      "typeVersion": 3.4,
+      "position": [
+        1696,
+        384
+      ]
+    },
+    {
+      "parameters": {
+        "operation": "delete",
+        "messageId": "={{ $('Prepare Approval Message').item.json.emailId }}"
+      },
+      "id": "0c8588af-0bfe-4b52-8290-793f4153655e",
+      "name": "Delete Spam Email",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2592,
+        304
+      ],
+      "webhookId": "ee803ffb-1046-4b96-a673-faa568570484",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EelnWs2976ajPqr6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "markAsRead",
+        "messageId": "={{ $('New Email Received').item.json.id }}"
+      },
+      "id": "acc60976-d4db-4739-9ae8-ef6734ec836f",
+      "name": "Mark as Read",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        1920,
+        496
+      ],
+      "webhookId": "22d33004-844c-4f37-a566-6a07c27c207a",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EelnWs2976ajPqr6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "operation": "reply",
+        "messageId": "={{ $('New Email Received').item.json.id }}",
+        "emailType": "text",
+        "message": "Thank you for your email. I have received your message and will review it shortly. This is an automated response to confirm receipt.",
+        "options": {}
+      },
+      "id": "4dd9ddee-9194-4f8e-a8c8-e8f7e5c64135",
+      "name": "Send Reply",
+      "type": "n8n-nodes-base.gmail",
+      "typeVersion": 2.2,
+      "position": [
+        2144,
+        496
+      ],
+      "webhookId": "5200af85-773f-4595-9176-9c8a59ce544e",
+      "credentials": {
+        "gmailOAuth2": {
+          "id": "EelnWs2976ajPqr6",
+          "name": "Gmail account"
+        }
+      }
+    },
+    {
+      "parameters": {
+        "assignments": {
+          "assignments": [
+            {
+              "id": "id-1",
+              "name": "emailSubject",
+              "value": "={{ $('New Email Received').item.json.Subject }}",
+              "type": "string"
+            },
+            {
+              "id": "id-2",
+              "name": "emailFrom",
+              "value": "={{ $('New Email Received').item.json.From }}",
+              "type": "string"
+            },
+            {
+              "id": "id-4",
+              "name": "classification",
+              "value": "={{ $json.output.classification }}",
+              "type": "string"
+            },
+            {
+              "id": "id-5",
+              "name": "confidence",
+              "value": "={{ $json.output.confidence }}",
+              "type": "number"
+            },
+            {
+              "id": "id-6",
+              "name": "reasoning",
+              "value": "={{ $json.output.reasoning }}",
+              "type": "string"
+            },
+            {
+              "id": "id-7",
+              "name": "emailId",
+              "value": "={{ $('New Email Received').item.json.id }}",
+              "type": "string"
+            },
+            {
+              "id": "id-8",
+              "name": "approvalMessage",
+              "value": "=SPAM EMAIL DETECTED - APPROVAL REQUIRED\n\nFrom: {{ $('New Email Received').item.json.From }}\nSubject: {{ $('New Email Received').item.json.Subject }}\nPreview: {{ $('New Email Received').item.json.snippet }}\n\nAI Analysis:\n- Classification: {{ $json.output.classification }}\n- Confidence: {{ ($json.output.confidence * 100).toFixed(0) }}%\n- Reasoning: {{ $json.output.reasoning }}\n\nShould this email be deleted?",
+              "type": "string"
+            }
+          ]
+        },
+        "options": {}
+      },
+      "id": "c7121d00-1b3b-4280-abce-9cf453c3d417",
+      "name": "Prepare Approval Message",
+      "type": "n8n-nodes-base.set",
+      "typeVersion": 3.4,
+      "position": [
+        1920,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "resume": "form",
+        "formTitle": "Delete Spam Email?",
+        "formDescription": "={{ $json.approvalMessage }}",
+        "formFields": {
+          "values": [
+            {
+              "fieldLabel": "Delete this email?",
+              "fieldType": "radio",
+              "fieldOptions": {
+                "values": [
+                  {
+                    "option": "Yes, delete it"
+                  },
+                  {
+                    "option": "No, keep it"
+                  }
+                ]
+              },
+              "requiredField": true
+            }
+          ]
+        },
+        "options": {
+          "respondWithOptions": {
+            "values": {
+              "formSubmittedText": "Your response has been recorded. The workflow will continue based on your decision."
+            }
+          }
+        }
+      },
+      "id": "3d133693-1b9e-4a66-90a3-099d47e62549",
+      "name": "Wait for Deletion Approval",
+      "type": "n8n-nodes-base.wait",
+      "typeVersion": 1.1,
+      "position": [
+        2144,
+        304
+      ],
+      "webhookId": "a227689c-e5a7-41df-8a04-1f8f2bf46505"
+    },
+    {
+      "parameters": {
+        "conditions": {
+          "options": {
+            "caseSensitive": true,
+            "leftValue": "",
+            "typeValidation": "strict",
+            "version": 2
+          },
+          "conditions": [
+            {
+              "id": "id-1",
+              "leftValue": "={{ $json['Delete this email?'] }}",
+              "rightValue": "=Yes, delete it",
+              "operator": {
+                "type": "string",
+                "operation": "equals"
+              }
+            }
+          ],
+          "combinator": "and"
+        },
+        "options": {}
+      },
+      "id": "381c30cc-1a99-4af0-9f7f-d89680152eab",
+      "name": "Check Approval Response",
+      "type": "n8n-nodes-base.if",
+      "typeVersion": 2.2,
+      "position": [
+        2368,
+        304
+      ]
+    },
+    {
+      "parameters": {
+        "pollTimes": {
+          "item": [
+            {
+              "mode": "everyMinute"
+            }
+          ]
+        },
+        "filters": {
+          "readStatus": "unread"
+        }
+      },
+      "id": "81a273ed-122c-456e-8e55-aee3ac0d7c18",
+      "name": "New Email Received",
+      "type": "n8n-nodes-base.gmailTrigger",
+      "typeVersion": 1.3,
+      "position": [
+        1120,
+        400
+      ]
+    }
+  ],
+  "pinData": {},
+  "connections": {
+    "OpenAI Chat Model": {
+      "ai_languageModel": [
+        [
+          {
+            "node": "Spam Analyzer Agent",
+            "type": "ai_languageModel",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Classification Output Parser": {
+      "ai_outputParser": [
+        [
+          {
+            "node": "Spam Analyzer Agent",
+            "type": "ai_outputParser",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Spam Analyzer Agent": {
+      "main": [
+        [
+          {
+            "node": "Route by Classification",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Route by Classification": {
+      "main": [
+        [
+          {
+            "node": "Prepare Approval Message",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Mark as Read",
+            "type": "main",
+            "index": 0
+          }
+        ],
+        [
+          {
+            "node": "Prepare Approval Message",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Mark as Read": {
+      "main": [
+        [
+          {
+            "node": "Send Reply",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Prepare Approval Message": {
+      "main": [
+        [
+          {
+            "node": "Wait for Deletion Approval",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Wait for Deletion Approval": {
+      "main": [
+        [
+          {
+            "node": "Check Approval Response",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Check Approval Response": {
+      "main": [
+        [
+          {
+            "node": "Delete Spam Email",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "New Email Received": {
+      "main": [
+        [
+          {
+            "node": "Spam Analyzer Agent",
+            "type": "main",
+            "index": 0
+          }
+        ]
+      ]
+    },
+    "Delete Spam Email": {
+      "main": [
+        []
+      ]
+    }
+  },
+  "active": true,
+  "settings": {
+    "executionOrder": "v1",
+    "binaryMode": "separate",
+    "availableInMCP": false,
+    "timeSavedMode": "fixed",
+    "callerPolicy": "workflowsFromSameOwner"
+  },
+  "versionId": "c2138275-c670-430b-b83f-50e3f4f0c9ae",
+  "meta": {
+    "templateCredsSetupCompleted": true,
+    "instanceId": "1834b74c04a10c30ca596c630ec31682da00ba2156e219c9b432c47e33843b58"
+  },
+  "id": "R6LvbIjc3pM9gF23",
+  "tags": []
+}
