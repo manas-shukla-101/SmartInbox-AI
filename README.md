@@ -3,6 +3,7 @@
 ![GitHub stars](https://img.shields.io/github/stars/your-username/repo-name?style=for-the-badge&color=ffd700)
 ![GitHub forks](https://img.shields.io/github/forks/your-username/repo-name?style=for-the-badge&color=808080)
 ![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=for-the-badge)
+![License](https://img.shields.io/badge/License-MIT-green) 
 ![Built with Python](https://img.shields.io/badge/Built%20with-LangFlow-blue?style=for-the-badge&logo=python)
 ![LLM](https://img.shields.io/badge/LLM-GPT--4o-orange?style=for-the-badge&logo=openai)
 ![Security](https://img.shields.io/badge/Security-Human--in--the--Loop-red?style=for-the-badge)
@@ -68,4 +69,46 @@ Unlike basic scripts, this project features a **Wait for Approval** node. This d
 
 ---
 
-## 
+## 💡 Why This Project?
+
+This project demonstrates:
+
+- **AI Integration**: Real-world OpenAI implementation
+- **Workflow Design**: Complex logic with approval gates
+- **Error Prevention**: Human-in-the-loop for critical actions
+- **Scalability**: Modular nodes for easy extension
+- **Best Practices**: Clean separation of concerns
+
+## 🔧 Use Cases
+
+- Personal email management
+- Business spam filtering
+- Automated customer support
+- Email workflow automation
+- AI prototype testing
+
+## 📊 Workflow Details
+
+| Node | Function | Type |
+|------|----------|------|
+| Gmail Trigger | Listens for new emails | Trigger |
+| SpamAnalyzer | Classifies content | AI Agent |
+| Route by Classification | Directs flow | Router |
+| Manual Approval | Human verification | Approval |
+| Delete Spam | Removes spam | Action |
+| Mark as Read | Processes legitimate | Action |
+| Send Reply | Auto-responds | Action |
+
+---
+
+
+---
+
+**Made with ❤️ by Manas Shukla**
+
+---
+
+## 🌐 Socials:
+[![Portfolio](https://img.shields.io/website?url=https%3A%2F%2Fmanas-shukla-portfolio.framer.website%2F)](https://manas-shukla-portfolio.framer.website/) [![Instagram](https://img.shields.io/badge/Instagram-%23E4405F.svg?logo=Instagram&logoColor=white)](https://instagram.com/manas_shukla_101) [![LinkedIn](https://img.shields.io/badge/LinkedIn-%230077B5.svg?logo=linkedin&logoColor=white)](https://linkedin.com/in/manas-shukla-006774370) [![email](https://img.shields.io/badge/Email-D14836?logo=gmail&logoColor=white)](mailto:shuklamanas8928@gmail.com) 
+
+---
