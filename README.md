@@ -55,8 +55,8 @@ Unlike basic scripts, this project features a **Wait for Approval** node. This d
 
 1. **Clone the Repository:**
    ```bash
-   git clone [https://github.com/yourusername/SmartInbox-AI.git](https://github.com/yourusername/SmartInbox-AI.git)
+   git clone [https://github.com/manas-shukla-101/SmartInbox-AI.git](https://github.com/manas-shukla-101/SmartInbox-AI.git)
    ```
 2. **Import JSON Configuration:**
    - Open your dashboard (LangFlow/Flowise).
-   - Click Upload/Import and select the (SmartInbox AI)[SmartInbox AI.json] file.
+   - Click Upload/Import and select the [SmartInbox AI](SmartInbox AI.json) file.
